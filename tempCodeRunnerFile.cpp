@@ -1,185 +1,115 @@
+//program to check if the singly linked list is a Palindrome or not.
+
+//done by Pushpender 3912
 #include<iostream>
-
 using namespace std;
-// Creating Class node 
-class Node{
-public:
-int data ; // data part 
-Node *link; // link class pointer 
 
+class node{				//class node is defined
+	public:
+		int data;		//data part(or information part) of node	
+		node* link;		//link par(or address part) of node
+	
+	node(){			//default constructor
+		data=NULL;	//data part initialized
+		link=NULL;	//address part initialized to NULL
+	}
+	
 };
-// Inserting at the end 
-void insertionAtEnd(Node *&start,int data,Node *&current){
-Node *node = new Node();  
-    node->data = data;  
-if(start ==NULL){ 
-    start = node; 
-    node->link = NULL;
-    current = node;
- }
- else{
-    current->link = node;
-    node->link = NULL;
-    current = node;
-    
+
+void display(node* save){				//display function to display elements and address of elements in memory
+	node* S=save;			//saving the start of the linked list
+	cout<<"\n  List elements are below\n\t\t";
+	while(S!=NULL){			//traversal loop
+		cout<<"  "<<S->data<<"  ";
+		S=S->link;
+	}
+	cout<<"\n\n\n";
 }
+
+void insertend(node* start){		//insertion function for insertion of element at end
+	node* n=new node();				//new node
+	n->link=NULL;
+	node* S=start;			//saving the start of the linked list
+	int value;
+	cout<<"Enter the value You want to add in the list :- ";
+	cin>>n->data;				//user input for data value of new node
+	if(S==NULL){
+		start=n;	
+	}
+	else{
+		while(S->link!=NULL){		//traversal loop to reach end of list
+			S=S->link;
+		}
+	}
+	S->link=n;
 }
-//  Display the traversed values
-void traverse(Node *start){
-      Node *p = start;
-    do{
-      cout<<p->data<<" ";
-      p = p->link;
-    }while (p!=NULL);
-       
+
+
+node* reverseList(node *temp){  
+    node *current = temp;  
+    node *prevNode = NULL, *nextNode = NULL;  
+      
+   //Swap the previous and next nodes of each node to reverse the direction of the list  
+    while(current != NULL){  
+        nextNode = current->link;  
+        current->link = prevNode;  
+        prevNode = current;  
+        current = nextNode;  
+    }  
+    return prevNode;  
 }  
-// Deleting the duplicate values 
-void dupe(Node *head){
-
-  
-    Node *p = head,*q = NULL;
-    while(p->link != NULL){
-   if(p->data == p->link->data){
-       q = p->link->link;
-       delete(p->link);
-       p->link = q;
-   }  
-  p = p->link;
-    }
    
-}
-// merging the two lists 
-void merge(Node *head1,Node *head2,Node *&newHead,Node *&newCurrent){
-    if(head1 == NULL || head2 == NULL){
-        cout<<"\nOne of the lists is empty";
-      return;
-    }
-    newHead = head1; // setting the head equal to the head of first list 
-    Node *p = head1;
-    while (p->link!=NULL){
-        p = p->link; // iterating the loop 
-    }
-    p->link = head2;
-    p = head2;   // setting the pointer to the head of the second list 
-    while (p->link!= NULL)
-    {
-        p = p->link;  // iterating the loop to the end 
-    }
-    newCurrent = p; // setting the new current to p 
-    newCurrent->link =  NULL;
-    
-    
-}
-void swap(int &a,int &b){    // swapping the two numbers by refrence 
-   int temp = a;
-   a = b;
-   b = temp;
-}
-bool sort(Node *head){ // sorting the list 
-    if(head ==NULL){
-        return false;
-    }
-    Node *p = head,*q = NULL;
-while(p->link != NULL){   
-    q = p->link;
-    while (q != NULL)
-       {
-        if(p->data > q->data){
-         swap(p->data,q->data);
-        
-
-     }
-     q= q->link;
-    }
-  
-  p = p->link;
-    }
-    return true;
-}
-bool rev(Node *head){  // reversing the sorted merged list 
-    if(head ==NULL){
-        return false;
-    }
-    Node *p = head,*q = NULL;
-while(p->link != NULL){
-    q = p->link;
-    while (q != NULL)
-       {
-        if(p->data < q->data){
-         swap(p->data,q->data);
-        
-
-     }
-     q= q->link;
-    }
-  
-  p = p->link;
-    }
-    return true;
-}
-
-int main(){
-    Node *head1 = NULL,*head2 = NULL,*current1 = head1,*current2 = head2,*newHead = NULL,*newCurrent;
-    int choice,data;
-    char ch = 'y';
-   while(ch=='y'){
-    cout<<"Enter the choice\n 1. Append 1st list \t2. Append 2nd list \t3. Display 1st \t4. Display 2nd \t \nChoice :- ";
-    cin>>choice;
-    switch (choice)
-    {
-    case 1: cout<<"Enter data to insert ";
-            cin>>data;
-            insertionAtEnd(head1,data,current1);
-        break;
-    case 2: cout<<"Enter data to insert ";
-            cin>>data;
-            insertionAtEnd(head2,data,current2);
-        break;
-    case 3: traverse(head1);
-        break;
-    case 4: traverse(head2);
-        break;
-    
+//isPalindrome() will determine whether given list is palindrome or not.  
+void isPalindrome(node* head){  
+    node *current = head;  
+    bool flag = true;  
+      
+    //Reverse the list after middle node to end  
+    node *revHead = reverseList(current->link);  
    
+    //Compare elements of list to its reversed list
+    while(head != NULL && revHead != NULL){  
+        if(head->data != revHead->data){  
+            flag = false;  
+            break;  
+        }  
+        head = head->link;  
+        revHead = revHead->link;  
+    }  
     
-    default: cout<<"Enter a correct choice !! ";
-    
-        break;
-    }
-    cout<<"\nDo you want to continue ? ";
-    cin>>ch;
-
- }
- cout<<"Success ";
-if(sort(head1)){
-cout<<"\nFirst Sorted list is : \n";
-traverse(head1);
-}else{
-    cout<<"\nFirst List is empty ";
+    cout<<"\n\n\t\t==========================\n ";
+    cout<<"\t\t     Result   \n";
+    cout<<"\t\t==========================\n";
+   
+    if(flag)  
+        cout<<"Given singly linked list is a palindrome\n";  
+    else  
+        cout<<"Given singly linked list is not a palindrome\n";  
 }
-if(sort(head2)){
-    cout<<"\nSecond Sorted list is : \n";
-traverse(head2);
-}else{
-    cout<<"\nSecond List is empty ";
-}
- 
-    merge(head1,head2,newHead,newCurrent);
-    
-    cout<<"\nMerged list is \n";
-    traverse(newHead);
-    cout<<"\nSorted merged list is : \n";
-   if(sort(newHead)){
-        
-    traverse(newHead);
-   }else{
-       cout<<"\nList is empty ";
-   }
-   cout<<"\nAfter removing duplicates : \n";
-    dupe(newHead);
-    traverse(newHead);
-    cout<<"\nReversed List is : \n";
-    rev(newHead);
-    traverse(newHead);
-    return 0;
+int main()  
+{  
+    //Add nodes to the list  
+    node* p1=new node();	//1st element of list before any function
+    node* p2=new node();
+    cout<<"\n\t\tPAlINDROME IN LINKED LIST CHECKER\n";
+	cout<<"\n\nEnter the value of 1st element :- ";
+	cin>>p1->data;			//user input for data value of 1st element
+	node* Start=new node();
+	Start->link=p1;			//START pointer node with data = null
+	int l;
+	char c='n';
+	cout<<"\t\t\tDo you wanna add more elements in the list ??\n\t\t\tPress y for yes:- ";
+	cin>>c;
+	while(c=='y'){			//user input loop for more element he/she wants enter
+		insertend(Start);		//AS always new element add in ending so insertion at end function called
+		cout<<"\t\t\tDo you wanna add more elements in the list ??\n\t\t\tPress y for yes:- ";
+		cin>>c;
+	}
+      
+    display(p1);  //display of entered linked list
+      
+    //Checks whether given list is palindrome or not  
+    isPalindrome(p1);
+      
+    return 0;  
 }

@@ -46,6 +46,7 @@ num1 = container.top();
      break;
  }else{
 container.push(stoi(input));
+
  }
 }
 cout<<"\nResult = "<<container.top();
