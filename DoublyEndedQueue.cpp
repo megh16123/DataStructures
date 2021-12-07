@@ -1,10 +1,10 @@
 #include<iostream>
 
 using namespace std;
-
+template <class T>
 class Dnode{
 public:
- int data;
+ T data;
  Dnode *prev,*next;
  Dnode(){
      data= 0;
@@ -12,8 +12,9 @@ public:
      next = NULL;
  }
 };
-void insertionAtEnd(Dnode *&start,Dnode *&current,int data){
-Dnode *node = new Dnode();
+template <typename T>
+void insertionAtEnd(Dnode<T> *&start,Dnode<T> *&current,T data){
+Dnode<T> *node = new Dnode<T>();
 node->data = data;
 if(start == NULL){
 start = node;
@@ -25,8 +26,9 @@ current = node;
   current = node;
 }
 }
-void insertAtBegin(Dnode *&start,Dnode *&current,int data){
-Dnode *node = new Dnode();
+template <typename T>
+void insertAtBegin(Dnode<T> *&start,Dnode<T> *&current,T data){
+Dnode<T> *node = new Dnode<T>();
 node->data = data;
 if(start == NULL){
   
@@ -42,45 +44,46 @@ current = node;
 }
 
 
-
-void traverse(Dnode *start){
-Dnode *p = start;
+template <typename T>
+void traverse(Dnode<T> *start){
+Dnode<T> *p = start;
 while (p != NULL){
   cout<<p->data<<" ";
   p = p->next;
 }
 
 }
-
-int sizeQ(Dnode *start){
+template <typename T>
+int sizeQ(Dnode<T> *start){
 int size = 0;
-Dnode *p = start;
+Dnode <T>*p = start;
 while (p != NULL){
 size++;
   p = p->next;
 }
 return size;
 }
-
-bool deleteEnd(Dnode *start,Dnode *current){
+template <typename T>
+bool deleteEnd(Dnode <T>*start,Dnode <T>*current){
 if(start == NULL){
   return false;
 }
-Dnode *p = start;
+Dnode <T>*p = start;
 while(p->next !=NULL){
   p = p->next;
 }
 p->prev->next = NULL;
 current = p->prev;
-Dnode *q = p;
+Dnode <T>*q = p;
 delete(q);
 return true;
 }
-bool deleteBeg(Dnode *&start){
+template <typename T>
+bool deleteBeg(Dnode <T>*&start){
 if(start == NULL){
   return false;
 }
-Dnode *q = start;
+Dnode <T>*q = start;
 start = start->next;
 start->next->prev = NULL;
 delete(q);
@@ -88,7 +91,7 @@ return true;
 }
 
 int main(){
-Dnode *start = NULL,*current = start;
+Dnode <int>*start = NULL,*current = start;
  int data,chce;
   char choice = 'y';
   while(choice=='y'){

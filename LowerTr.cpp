@@ -1,7 +1,8 @@
 #include<iostream>
 
 using namespace std;
-void valueInput(int *array,int rows,int columns){
+template<typename T>
+void valueInput(T *array,T rows,T columns){
 cout<<"Enter the values \n";
 for(int i = 0;i<rows;i++){
     for (int j = 0; j < columns; j++)
@@ -16,7 +17,8 @@ for(int i = 0;i<rows;i++){
     
 }
 }
-void valueDisplay(int *array,int rows,int columns){
+template<typename T>
+void valueDisplay(T *array,T rows,T columns){
 cout<<" Array \n";
 for(int i = 0;i<rows;i++){
     for (int j = 0; j < columns; j++)

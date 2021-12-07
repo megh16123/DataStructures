@@ -1,15 +1,19 @@
 #include<iostream>
+
 using namespace std;
-void show(int array[],int n){
+template <typename T>
+void show(T array[],int n){
     for(int i= 0;i<n;i++){
         cout<<array[i]<<" ";
     }}
-void swap(int &a,int &b){
-   int temp = a;
+template <typename T>    
+void swape(T &a,T &b){
+   T temp = a;
    a = b;
    b = temp;
 }
-int bubbleSort(int array[],int n){
+template <typename T>
+int bubbleSort(T array[],int n){
  int passes =0 ;
  cout<<"Intermediate values \n";
 for(int i =0;i<n-(n/2)+1;i++){
@@ -17,15 +21,16 @@ for(int i =0;i<n-(n/2)+1;i++){
     int swaps = 0;
     for(int j=0;j<n;j++){
     if(array[j]>array[j+1]){
-        swap(array[j],array[j+1]);
-    swaps++;
+        swape(array[j],array[j+1]);
+        swaps++;
     }}    show(array,n);
 cout<<"Number of Swaps ->"<<swaps<<endl;
 }
 cout<<"Number of passes ->"<<passes<<endl;
 return passes;
 }
-int  selectionSort(int array[],int n){
+template <typename T>
+int  selectionSort(T array[],int n){
     int passes = 0;
      cout<<"Intermediate values \n";
     for(int i =0;i<n-1;i++){
@@ -36,7 +41,7 @@ passes++;
             minIn = j;       
           }    
         }
-         swap(array[i],array[minIn]);
+         swape(array[i],array[minIn]);
         swaps++;
             show(array,n);
     cout<<" Number of swaps ->"<<swaps<<endl;
@@ -44,8 +49,10 @@ passes++;
     cout<<"Number of Passes ->"<<passes;
 return passes;
 }
-int insertionSort(int array[],int n){
-int key,passes=0;
+template <typename T>
+int insertionSort(T array[],int n){
+T key;
+int passes=0;
  cout<<"Intermediate values \n";
 for(int i=1;i<n;i++){
 		key=array[i];
@@ -62,12 +69,14 @@ for(int i=1;i<n;i++){
 cout<<"Number of passes ->"<<passes;
 return passes;
 }
-void copyArray(int array[],int oldArray[],int n){
+template <typename T>
+void copyArray(T array[],T oldArray[],int n){
     for(int i= 0;i<n;i++){
         array[i] = oldArray[i];
     }
 }
-void inputArray(int array[],int n){
+template <typename T>
+void inputArray(T array[],int n){
     cout<<"Enter the values ";
     for(int i=0;i<n;i++){
         cout<<"Index "<<i<<" ";
@@ -82,11 +91,11 @@ int main()
    inputArray(array,size);
    copyArray(oldArray,array,size);
    cout<<"\nBubble Sort :- \n";
-  BP = bubbleSort(array,size);
+   BP = bubbleSort(array,size);
    show(array,size);
    cout<<"\nSelection Sort\n";
    copyArray(array,oldArray,size);
- SP =   selectionSort(array,size);
+   SP =   selectionSort(array,size);
    cout<<"\nInsertion Sort\n";
    copyArray(array,oldArray,size);
    IP = insertionSort(array,size);

@@ -2,8 +2,8 @@
 #include<iostream>
 
 using namespace std;
-
-bool BinarySearch(int array[],int size,int item){
+template <typename T>
+bool BinarySearch(T array[],int size,T item){
 int left = 0,right = size;
   int  mid = (left+right)/2;
 do{
@@ -19,7 +19,8 @@ do{
 }while(mid != left  || mid == right);
 return false;
 }
-void enterValues(int array[],int size){
+template <typename T>
+void enterValues(T array[],int size){
 cout<<"Enter the values (array must be sorted)\n";
 for(int i = 0;i<size;i++){
     cout<<"Index "<<i+1<<" : ";

@@ -1,7 +1,8 @@
  #include<iostream>
 using namespace std;
 // insertion
-void insert(int array[],int LB,int &UB,int n,int value,int index){
+template <typename T>
+void insert(T array[],int LB,int &UB,int n,T value,int index){
 if(UB==n){
  cout<<"Array is full";
 }else if(index>n){
@@ -22,7 +23,8 @@ UB++;
 }
 }
 // display
-void display(int array[],int LB,int UB){
+template <typename T>
+void display(T array[],int LB,int UB){
  if(LB==UB){
  cout<<"The array is empty";
  }else{
@@ -33,7 +35,8 @@ for(int i = LB;i<UB;i++){
 }
 }}
 // deletion
-void deleteItem(int array[],int LB,int &UB,int index){
+template <typename T>
+void deleteItem(T array[],int LB,int &UB,int index){
 if(index == UB){
  UB--;
 }else{
@@ -44,8 +47,10 @@ UB--;
 }
 }
 // min max with location
-void min_max(int array[],int UB){
- int min = array[0],max= array[0],minIND,maxIND;
+template <typename T>
+void min_max(T array[],int UB){
+ T min = array[0],max= array[0];
+ int minIND,maxIND;
 for(int i = 1;i<UB;i++){
  for(int j =0;j<UB;j++){
  if(array[j]<min){
@@ -61,7 +66,8 @@ cout<<"Minimum Value in the array is "<<min<<" @ "<<minIND<<endl;
 cout<<"Maximum Value in the array is "<<max<<" @ "<<maxIND;
 }
 // searching for an element
-bool search(int array[],int LB,int UB,int n,int item_to_search ){
+template <typename T>
+bool search(T array[],int LB,int UB,int n,T item_to_search ){
 for(int i = LB;i<UB;i++){
  if(item_to_search = array[i]){
  cout<<"Item found ";

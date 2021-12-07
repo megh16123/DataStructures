@@ -1,8 +1,8 @@
 #include<iostream>
 
 using namespace std;
-
-void valueInput(int *array,int rows,int columns){
+template <typename T>
+void valueInput(T *array,int rows,int columns){
 cout<<"Enter the values \n";
 for(int i = 0;i<rows;i++){
     for (int j = 0; j < columns; j++)
@@ -13,7 +13,8 @@ for(int i = 0;i<rows;i++){
     
 }
 }
-void valueDisplay(int *array,int rows,int columns){
+template <typename T>
+void valueDisplay(T *array,int rows,int columns){
 cout<<" Array \n";
 for(int i = 0;i<rows;i++){
     for (int j = 0; j < columns; j++)
@@ -23,7 +24,8 @@ for(int i = 0;i<rows;i++){
 cout<<endl;    
 }
 }
-void arraySum(int *array,int *array1,int rows,int columns){
+template <typename T>
+void arraySum(T *array,T *array1,int rows,int columns){
 int sum[rows][columns];
 for(int i = 0;i<rows;i++){
     for (int j = 0; j < columns; j++)
@@ -31,20 +33,22 @@ for(int i = 0;i<rows;i++){
        sum[i][j] = *(array+i*columns+j) + *(array1+i*columns+j);
     }
 }
-valueDisplay((int *)sum,rows,columns);
+valueDisplay((T *)sum,rows,columns);
 }
-void arraySub(int *array,int *array1,int rows,int columns){
-int sub[rows][columns];
+template <typename T>
+void arraySub(T *array,T *array1,int rows,int columns){
+T sub[rows][columns];
 for(int i = 0;i<rows;i++){
     for (int j = 0; j < columns; j++)
     {
        sub[i][j] = *(array+i*columns+j) - *(array1+i*columns+j);
     }
 }
-valueDisplay((int *)sub,rows,columns);
+valueDisplay((T *)sub,rows,columns);
 }
-void arrayMul(int *array,int *array1,int rows,int columns){
-int mul[rows][columns];
+template <typename T>
+void arrayMul(T *array,T *array1,int rows,int columns){
+T mul[rows][columns];
 for(int i = 0;i<rows;i++){
     for(int j=0;j<columns;j++){
         mul[i][j] = 0;
@@ -57,10 +61,11 @@ for(int i = 0;i<rows;i++){
                 // mul[i][j] = 0;
                 mul[i][j] += (*(array+i*columns+k)) * (*(array1+k*columns+j));
             }
-valueDisplay((int *)mul,rows,columns);
+valueDisplay((T *)mul,rows,columns);
 
 }
-void arrayScaler(int *array,int rows,int columns,int num,char ch){
+template <typename T>
+void arrayScaler(T *array,int rows,int columns,T num,char ch){
 switch(ch){
     case '+': for(int i = 0;i<rows;i++){
                 for (int j = 0; j < columns; j++)

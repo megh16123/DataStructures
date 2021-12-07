@@ -11,38 +11,42 @@ Node(){
   link = NULL;
 }
 };
+
 template <typename T>
-void insertionAtEnd(Node<T> *&start,T data,Node<T> *&current){
-Node <T>*node = new Node<T>();
+void insertionAtEnd(Node<int> *&start,T data,Node<int> *&current){
+Node  <int>*node = new Node<int>;
     node->data = data;
 if(start ==NULL){
     start = node;
     node->link = NULL;
     current = node;
-}else{
+ }
+ else{
     current->link = node;
     node->link = NULL;
     current = node;
     
 }
 }
+
+
 template <typename T>
-void insertAtBegin(Node<T> *&start,T data,Node<T> *&current){
-Node<T> *node = new  Node<T>();
+void insertAtBegin(Node <int>*&start,T data,Node<int> *&current){
+Node <int>*node = new  Node<int>;
    node->data = data;
 if(start == NULL){
     start = node;
     node->link = NULL;
-    current = node;+
+    current = node;
 }else{
 node->link = start;
 start = node;
 }
 }
 template <typename T>
-bool insertBeforeVal(Node<T> *start,T data,T key){
-Node <T>*p = start;
-Node <T>*node = new Node<T>();
+bool insertBeforeVal(Node <int>*start,T data,T key){
+Node <int>*p = start;
+Node <int>*node = new Node<int>;
 node->data = data;
 do{
   if(p->link->data == key){
@@ -55,9 +59,9 @@ do{
 return false;
 }
 template <typename T>
-bool insertAfterVal(Node<T> *start,T data,T key){
-  Node<T> *p = start;
-  Node<T> *node = new Node<T>();
+bool insertAfterVal(Node <int>*start,T data,T key){
+  Node <int>*p = start;
+  Node <int>*node = new Node<int>;
   node->data = data;
   do{
  if(p->data == key){
@@ -70,13 +74,13 @@ bool insertAfterVal(Node<T> *start,T data,T key){
 return false;
 }
 template <typename T>
-bool deleteVal(Node<T> *start,T data){
+bool deleteVal(Node <int>*start,T data){
  if(start == NULL){
    cout<<"\nThe list is empty\n";
    return false;
  }
-  Node <T>*p = start;
-  Node <T>*temp;
+  Node <int>*p = start;
+  Node <int>*temp;
   
   do{
  if(p->link->data == data){ 
@@ -91,18 +95,18 @@ bool deleteVal(Node<T> *start,T data){
 }while(p!=NULL);
 return false;
 }
-template <typename T>
-void traverse(Node<T> *start){
-      Node <T>*p = start;
+
+void traverse(Node <int>*start){
+      Node <int>*p = start;
     do{
       cout<<p->data<<" ";
       p = p->link;
     }while (p!=NULL);
        
-}  
-template <typename T>
-bool SearchNode(Node<T> *start ,T data){
-  Node <T>*p = start;
+}
+template <typename T>  
+bool SearchNode(Node <int>*start ,T data){
+  Node <int>*p = start;
   if(start == NULL ){
     return false;
   }
@@ -114,33 +118,31 @@ bool SearchNode(Node<T> *start ,T data){
     }while (p!=NULL);
     return false;
 }
-template <typename T>
-bool deleteBeg(Node<T> *&start){
+bool deleteBeg(Node <int>*&start){
 if(start==NULL){
   return false;
 }
-Node <T>*q = start;
+Node <int>*q = start;
 start = start->link;
 delete(q);
 return true;
 }
-template <typename T>
-bool deleteEnd(Node<T> *start,Node<T> *&current){
+bool deleteEnd(Node <int>*start,Node <int>*&current){
 if(start==NULL){
   return false;
 }
-Node <T>*p = start;
+Node <int>*p = start;
 while(p->link->link!=NULL){
   p = p->link;
 }
 
-Node <T>*q = p->link;
+Node <int>*q = p->link;
 current = p;
 p->link = NULL;
 delete(q);
 }
 int main() {
-  Node<int> *start=NULL,*n1,*current = start;
+  Node <int>*start=NULL,*n1,*current = start;
   int data,chce;
   char choice = 'y';
   while(choice=='y'){
